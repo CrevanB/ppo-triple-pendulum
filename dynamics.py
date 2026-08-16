@@ -9,9 +9,6 @@ Input: F (force on cart)
 Params: M (cart mass), m1, m2, m3 (point masses), l1, l2, l3 (link lengths),
         g (gravity), b (cart damping/friction coefficient)
 
-Note: For an N-link pendulum where N >= 3, constructing the Mass Matrix (M)
-and Forcing/Coriolis vector (C) and solving M * acc = C is vastly superior
-to hardcoding the closed-form algebraic expansions.
 """
 import numpy as np
 
