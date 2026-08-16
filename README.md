@@ -1,17 +1,19 @@
-PPO Triple Inverted Pendulum Controller
+PPO Triple Inverted Pendulum Controller.
 
 A reinforcement-learning controller for a triple inverted pendulum on a cart, trained with PPO (Proximal Policy Optimisation) via Stable-Baselines3. 
+
+Cart damping is modelled, but joint friction, motor dynamics, and other real-world effects are not. It's an idealised, somewhat simplistic physics simulation.
+
 Two policies work together: one learns to swing the pendulum up from hanging, and a second learns to balance it once near upright. An interactive pygame GUI lets you watch the trained controller run live and switches between the two policies automatically based on the pendulum's angle.
 
-What This Is
-The system is a cart with three pendulum links attached end-to-end (a "triple pendulum"), free to swing. A force applied to the cart is the only control input. 
+A force applied to the cart is the only control input. 
 
 Swing-up — starting from hanging straight down, pump energy into the system to bring all three links up near vertical.
 Balance — once near upright, make small, precise corrections to keep the pendulum stable against gravity and disturbance.
 
 Rather than train one policy to do both, this project trains two separate PPO policies — a swing-up specialist and a balance specialist — and switches between them at runtime based on how close all three link angles are to upright.
 
-Requires Python 3.9+ and the following packages, stable-baselines3, gymnasium, numpy, pygame
+Requires Python and following packages, stable-baselines3, gymnasium, numpy, pygame
 
 train.py	Training script — trains either the swing-up or balance policy via PPO
 triple_pendulum_env.py	Gymnasium environment defining the pendulum's observation/action space, reward, and reset logic for both modes
@@ -22,7 +24,7 @@ ppo_triple_pendulum_swingup.zip / .pkl	Trained swing-up policy and its VecNormal
 ppo_triple_pendulum_balance.zip / .pkl	Trained balance policy and its VecNormalize observation stats
 Reward Structure
 
-The reward function, termination logic, and success criteria are identical for both swing-up and balance training — only the reset distribution differs between the two modes (see triple_pendulum_env.py). Each step, the reward sums:
+The reward function, termination logic, and success criteria are identical for both swing-up and balance training — only the reset distribution differs between the two modes (see triple_pendulum_env.py). Each step, the reward components are:
 
 Height bonus — positive reward for each link's height (weighted cos(θ) per link); the core "get upright" signal.
 Alignment reward — bonus for the three links staying straight relative to each other, gated on only once the bottom link is more than ~50° from hanging down, so it doesn't interfere with the initial swing.
