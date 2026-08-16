@@ -29,13 +29,13 @@ The reward function, termination logic, and success criteria are identical for b
 Height bonus — positive reward for each link's height (weighted cos(θ) per link); the core "get upright" signal.
 Alignment reward — bonus for the three links staying straight relative to each other, gated on only once the bottom link is more than ~50° from hanging down, so it doesn't interfere with the initial swing.
 Stillness reward — bonus for low angular velocity, ramped in only once the height bonus is already near maximum, rewarding settling down rather than oscillating near the top.
-Penalties — cart position, control effort, cart velocity, a hard "anti-blender" penalty if any link's angular velocity exceeds a limit, and a hard energy penalty if total pendulum energy exceeds a target multiple.
+Penalties — cart position, control effort, cart velocity, a hard "anti-blender" penalty if any link's angular velocity exceeds a limit, and a hard energy penalty if total pendulum energies exceeds a target multiple.
 
-Termination happens only if the cart goes off-track. A strict success condition (tight tolerances on all three angles, all three angular velocities, cart position, and cart velocity, sustained for a required number of consecutive steps) grants a one-time success bonus.
-Because the reward is mode-agnostic, the difference between swing-up and balance behaviour comes entirely from where each policy starts training — hanging down with a wide initial-state distribution vs. near-upright with a narrow one — not from a different reward signal.
+Termination happens only if the cart goes off-track. A strict success condition (tight tolerances on all three angles, all three angular velocities, cart position, and cart velocity, sustained for a required number of consecutive steps) grants a success bonus.
+Because the reward is mode-agnostic, the difference between swing-up and balance behaviour comes entirely from where each policy starts training — swing-up has a wide initial-state distribution vs. near-upright for balance controller — not from a different reward signal.
 
 Training
-Both policies are trained with the same script, train.py, using a --balance-mode flag to switch environment reset behavior, and a curriculum that gradually widens the initial-state distribution over training.
+Both policies are trained with the same script, train.py, using a --balance-mode flag to switch environment reset behaviour, and a curriculum that gradually widens the initial-state distribution over training.
 Swing-up (from scratch, hanging → upright). 2M-step curriculum ramp + 3M more steps at full difficulty = 5M total:
 
 bash
