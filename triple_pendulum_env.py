@@ -1,6 +1,6 @@
 """
 Gymnasium environment: triple inverted pendulum on a cart
-Phase-Aware, Clean Swing-up reward.
+
 """
 
 import math
