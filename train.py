@@ -171,7 +171,7 @@ class TimeBasedCurriculum(BaseCallback):
 
 class AdaptiveEntropyCallback(BaseCallback):
     """
-    Dynamically adjusts model.ent_coef based on the policy's current action
+    Option to use dynamically adjustment model.ent_coef based on the policy's current action
     std, instead of using one fixed value for the whole run.
 
     - If std drops below `target_std_min`, ent_coef is nudged UP (multiply by
