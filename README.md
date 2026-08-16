@@ -4,7 +4,7 @@ A reinforcement-learning controller for a triple inverted pendulum on a cart, tr
 
 Cart damping is modelled, but joint friction, motor dynamics, and other real-world effects are not. It's an idealised, somewhat simplistic physics simulation.
 
-Two policies work together: one learns to swing the pendulum up from hanging, and a second learns to balance it once near upright. An interactive pygame GUI lets you watch the trained controller run live and switches between the two policies automatically based on the pendulum's angle.
+Two policies work together: one learns to swing the pendulum up from hanging, and a second learns to balance it once near upright. An interactive pygame GUI lets you watch the trained controller run live and switches between the two policies automatically based on the pendulums' angle.
 
 A force applied to the cart is the only control input. 
 
